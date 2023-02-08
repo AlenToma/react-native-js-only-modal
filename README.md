@@ -89,7 +89,7 @@ Name |	Type |	Default |	Description|
 | `onAnimationBegin` | `Function` | undefined | A function that is called when the animation has been started. |
 | `onAnimationEnd` | `Function` | undefined | A function that is called when the animation has been completed successfully or cancelled. Function is called with an endState argument, refer to endState.finished to see if the animation completed or not. |
 | `useNativeDriver` | `boolean` | false | Whether to use native or JavaScript animation driver. Native driver can help with performance but cannot handle all types of styling. |
-| `dimensions` | `string` | "screen" | The library gets the `Dimensions` by `screen` or `window`. This is useFull when using FullScreen mode so that the backdrop takes all the screen. When using `react-native-web` is best to use `window` instead of `screen` |
+| `dimensions` | `string` | "window" | The library gets the `Dimensions` by `screen` or `window`. This is useFull when using FullScreen mode so that the backdrop takes all the screen. When using `react-native-web` is best to use `window` instead of `screen` |
 | `disableBackHandler` | `boolean` | false | When clicking mobile back `button` `onCloseRequest` will be called if specified |
 
 
