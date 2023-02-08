@@ -92,3 +92,6 @@ Name |	Type |	Default |	Description|
 
 ## Available animations
 I am using [react-native-animatable](https://github.com/oblador/react-native-animatable#animatableexplorer-example) for animations, so you can see there what animation it offers.
+ 
+ ## ScrollView
+ `Modal` dose not containe `ScrollView` so you have to add it if you want to use any.
