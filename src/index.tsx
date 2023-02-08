@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect, useRef, useContext } from 'react';
 import * as Animatable from 'react-native-animatable';
-import { View, StyleSheet, Dimensions, BackHandler } from 'react-native';
+import { View, StyleSheet, Dimensions, BackHandler , StatusBar} from 'react-native';
 import uuid from 'react-uuid';
 import { Size, Props, Item, IContext } from './typings';
 const ContextProvider = React.createContext({} as IContext);
 const screenSize = (dimensions?: 'screen' | 'window') => {
-  return {
+  const size = {
     width: Dimensions.get(dimensions ?? 'window').width,
-    height: Dimensions.get(dimensions ?? 'window').height,
+    height: Dimensions.get(dimensions ?? 'window').height
   } as Size;
+  return size;
 };
 
 const Provider = ({
@@ -120,11 +121,11 @@ const InternalModal = ({
   }, []);
 
   const viewStyle = () => {
-    let style = Array.isArray(item.component.props.style)
+    let dstyle = Array.isArray(item.component.props.style)
       ? item.component.props.style
       : [item.component.props.style];
-    style = [styles.center, ...style, { zIndex: 2 }];
-    return style;
+    dstyle = [styles.center, ...dstyle, { zIndex: 2 }];
+    return dstyle;
   };
 
   const isOutSide = (e: any) => {
@@ -152,9 +153,7 @@ const InternalModal = ({
           animation={'fadeIn'}
           style={{
             ...styles.modal,
-            minHeight: size.height,
-            minWidth: size.width,
-            height: '100%',
+            ...size,
             zIndex: (zIndex - 1) * (index + 1),
           }}>
           <View
@@ -306,13 +305,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
+    maxHeight:"100%",
+    minHeight:"100%"
   },
+  
   center: {
     width: '90%',
     backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 5,
     padding: 8,
+    minHeight:150
   },
 });
 
