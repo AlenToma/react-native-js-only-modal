@@ -21,7 +21,7 @@ The library available at `npm install react-native-js-only-modal`
 [react-native-js-only-modal](https://snack.expo.dev/@alentoma/react-native-js-only-modal)
 
 ## usage
-Since `react-native-js-only-modal` dose not include any native code and use only `js` when need it to be able to reach the root of the app.
+Since `react-native-js-only-modal` dose not include any native code and use only `js` then you need it to be able to reach the root of the app.
 
 In `APP` components add the `Provider` around the whole component
 
