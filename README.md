@@ -38,7 +38,8 @@ return (
 ```
 2. Create a <Modal> component and nest its content inside of it
 ```tsx
-`import { Modal } from './ModalProvider';`
+import { Modal } from './ModalProvider';
+ 
 function WrapperComponent() {
  // show the Modal by setting `visible` = true
  const [visible, setVisible] = React.useState(false);
