@@ -55,7 +55,7 @@ function WrapperComponent() {
   );
 }
 ```
-The isVisible prop is the only prop you'll really need to make the modal work: you should control this prop value by saving it in your wrapper component state and setting it to true or false when needed.
+The `visible` prop is the only prop you'll really need to make the modal work: you should control this prop value by saving it in your wrapper component state and setting it to true or false when needed.
 
 `Modal` already has `transparent` background so by setting style you can customize it however you like.
 
