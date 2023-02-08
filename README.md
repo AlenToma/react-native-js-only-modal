@@ -46,7 +46,7 @@ function WrapperComponent() {
  const [visible, setVisible] = React.useState(true);
   return (
     <View>
-      <Modal visible={visible} style={[styles.container, styles.center]}>
+      <Modal visible={visible}>
         <View style={{ flex: 1 }}>
           <Text>I am the modal content!</Text>
         </View>
@@ -54,21 +54,6 @@ function WrapperComponent() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  center: {
-    width: '90%',
-    maxHeight: 200,
-    backgroundColor: 'white',
-    flex: undefined,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: 'red',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    padding: 8,
-  },
-});
 ```
 The isVisible prop is the only prop you'll really need to make the modal work: you should control this prop value by saving it in your wrapper component state and setting it to true or false when needed.
 
