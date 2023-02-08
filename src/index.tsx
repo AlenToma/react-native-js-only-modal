@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef, useContext } from 'react';
 import * as Animatable from 'react-native-animatable';
-import { View, StyleSheet, Dimensions, BackHandler , StatusBar} from 'react-native';
+import { View, StyleSheet, Dimensions, BackHandler} from 'react-native';
 import uuid from 'react-uuid';
 import { Size, Props, Item, IContext } from './typings';
 const ContextProvider = React.createContext({} as IContext);
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     maxHeight:"100%",
     minHeight:"100%"
   },
-  
+
   center: {
     width: '90%',
     backgroundColor: 'white',
