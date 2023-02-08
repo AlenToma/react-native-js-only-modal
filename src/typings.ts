@@ -5,12 +5,12 @@ import { Animation, CustomAnimation, Easing } from 'react-native-animatable';
 export type Props = {
   children: React.ReactNode[] | React.ReactNode;
   visible: boolean;
-  onCloseRequest?: () => void;
+  onCloseRequest?: (action?: "BackButton" | "BackDrop") => void;
   hideBackDrop?: boolean;
   backDropStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
-  easing: Easing;
+  easing?: Easing;
   animationIn?: Animation | CustomAnimation;
   animationOut?: Animation | string | CustomAnimation;
   direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
@@ -43,5 +43,5 @@ export type IContext = {
   updateProps: (props: Props, id: string) => void;
   push: (item: Item) => void;
   items: Map<string, Item>;
-  zIndex:number;
+  zIndex: number;
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef, useContext } from 'react';
 import * as Animatable from 'react-native-animatable';
-import { View, StyleSheet, Dimensions, BackHandler} from 'react-native';
+import { View, StyleSheet, Dimensions, BackHandler } from 'react-native';
 import uuid from 'react-uuid';
 import { Size, Props, Item, IContext } from './typings';
 const ContextProvider = React.createContext({} as IContext);
@@ -22,7 +22,7 @@ const Provider = ({
 }) => {
   const data = {
     items: new Map(),
-    update: () => {},
+    update: () => { },
     find: (id: string) => {
       return data.items.get(id);
     },
@@ -63,7 +63,7 @@ const ModalContainer = () => {
   return (
     <>
       {rItem.map((x, index) => (
-        <InternalModal item={x} zIndex={context.zIndex} index={index} />
+        <InternalModal key={index} item={x} zIndex={context.zIndex} index={index} />
       ))}
     </>
   );
@@ -110,7 +110,7 @@ const InternalModal = ({
       'hardwareBackPress',
       () => {
         if (item.component.props.disableBackHandler !== true)
-          item.component.props.onCloseRequest?.();
+          item.component.props.onCloseRequest?.("BackButton");
         return true;
       }
     );
@@ -192,7 +192,7 @@ const InternalModal = ({
           item.component.props.containerStyle,
         ]}
         onResponderRelease={(e: any) => {
-          if (isOutSide(e)) item.component.props.onCloseRequest?.();
+          if (isOutSide(e)) item.component.props.onCloseRequest?.("BackDrop");
         }}
         onStartShouldSetResponder={(e: any) => {
           return isOutSide(e);
@@ -305,8 +305,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    maxHeight:"100%",
-    minHeight:"100%"
+    maxHeight: "100%",
+    minHeight: "100%"
   },
 
   center: {
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 8,
-    minHeight:150
+    minHeight: 150
   },
 });
 
