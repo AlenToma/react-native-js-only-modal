@@ -5,6 +5,8 @@ Now the different between this and what `react-native` already have is that, fir
 
 Which make it much faster at rendering and easier to customize.
 
+<img src="https://github.com/AlenToma/react-native-js-only-modal/blob/main/ezgif-5-5a82d38a62.gif?raw=true"  height="500" />
+
 ## Features
 Smooth enter/exit animations
 Plain simple and flexible APIs
