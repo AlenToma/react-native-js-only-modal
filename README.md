@@ -1,7 +1,7 @@
 # react-native-js-only-modal
 If you are new to `react-native` you will find that `react-native` already has a [Modal component](https://reactnative.dev/docs/modal) that you could already use.
 
-Now the diffrient between the this and what `react-native` already have is that, first this is only `js` library, it dose not use any `native code` and also dose not reuse `react-native` [Modal component](https://reactnative.dev/docs/modal) like other libraries.
+Now the different between this and what `react-native` already have is that, first this is only `js` library, it dose not use any `native code` and also dose not reuse `react-native` [Modal component](https://reactnative.dev/docs/modal) like other libraries.
 
 Which make it much faster at rendering and easier to customize.
 
@@ -9,7 +9,7 @@ Which make it much faster at rendering and easier to customize.
 Smooth enter/exit animations
 Plain simple and flexible APIs
 Customizable backdrop styling
-Listeners for the modal animations ending
+Listeners for the modal animations start and ending
 Resize itself correctly on device rotation
 
 ## Setup
