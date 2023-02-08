@@ -15,6 +15,9 @@ Resize itself correctly on device rotation
 ## Setup
 the library available at `npm install react-native-js-modal`
 
+## Snack Example
+[react-native-js-modal](https://snack.expo.dev/@alentoma/react-native-js-modal)
+
 ## usage
 Since `react-native-js-modal` dose not include any native code and use only `js` when need it to be able to reach the root of the app.
 
