@@ -43,7 +43,7 @@ import { Modal } from 'react-native-js-only-modal';
  
 function WrapperComponent() {
  // show the Modal by setting `visible` = true
- const [visible, setVisible] = React.useState(false);
+ const [visible, setVisible] = React.useState(true);
   return (
     <View>
       <Modal visible={visible} style={[styles.container, styles.center]}>
