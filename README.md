@@ -1,4 +1,4 @@
-# react-native-js-modal
+# react-native-js-only-modal
 If you are new to `react-native` you will find that `react-native` already has a [Modal component](https://reactnative.dev/docs/modal) that you could already use.
 
 Now the diffrient between the this and what `react-native` already have is that, first this is only `js` library, it dose not use any `native code` and also dose not reuse `react-native` [Modal component](https://reactnative.dev/docs/modal) like other libraries.
@@ -13,13 +13,13 @@ Listeners for the modal animations ending
 Resize itself correctly on device rotation
 
 ## Setup
-the library available at `npm install react-native-js-modal`
+the library available at `npm install react-native-js-only-modal`
 
 ## Snack Example
-[react-native-js-modal](https://snack.expo.dev/@alentoma/react-native-js-modal)
+[react-native-js-only-modal](https://snack.expo.dev/@alentoma/react-native-js-only-modal)
 
 ## usage
-Since `react-native-js-modal` dose not include any native code and use only `js` when need it to be able to reach the root of the app.
+Since `react-native-js-only-modal` dose not include any native code and use only `js` when need it to be able to reach the root of the app.
 
 In `APP` components add the `Provider` around the whole component
 
