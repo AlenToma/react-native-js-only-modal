@@ -95,12 +95,12 @@ And this is done by specifing the `zIndex`
  ## Default Style
  The default style for the `Modal` Content. override it by specifying style prop
  ```json
-    width: '90%',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 8,
-    minHeight: 150
+    "width": "90%",
+    "backgroundColor": "white",
+    "borderWidth": 1,
+    "borderRadius": 5,
+    "padding": 8,
+    "minHeight": 150
  ```
  
  ## ScrollView
