@@ -13,7 +13,7 @@ Listeners for the modal animations ending
 Resize itself correctly on device rotation
 
 ## Setup
-the library available at `npm install react-native-js-only-modal`
+The library available at `npm install react-native-js-only-modal`
 
 ## Snack Example
 [react-native-js-only-modal](https://snack.expo.dev/@alentoma/react-native-js-only-modal)
