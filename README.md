@@ -105,7 +105,7 @@ When viewing more than one `Modal` it works that the last visible `Modal` gets o
 
 And this is done by specifing the `zIndex`
 
-`zIndex` default start value is `90000` you can `increase` or `decrease` this value by specifying `zIndex` for `Provider`
+`zIndex` default start value is `90000` you can `increase` or `decrease` this value by specifying `zIndex` for `Provider` 
  
  ## ScrollView
  `Modal` dose not containe `ScrollView` so you have to add it if you want to use any.
