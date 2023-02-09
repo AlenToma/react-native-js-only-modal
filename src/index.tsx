@@ -8,7 +8,7 @@ const ContextProvider = React.createContext({} as IContext);
 const screenSize = (dimensions?: 'screen' | 'window') => {
   const size = {
     width: Dimensions.get(dimensions ?? 'window').width,
-    height: Dimensions.get(dimensions ?? 'window').height
+    height: Dimensions.get(dimensions ?? 'window').height,
   } as Size;
   return size;
 };
@@ -40,6 +40,14 @@ const Provider = ({
     zIndex: zIndex || 90000,
   } as IContext;
 
+  useEffect(() => {
+    return () => {
+      data.items.clear();
+      data.update();
+    }
+  }, [])
+
+
   return (
     <ContextProvider.Provider value={data}>
       {children}
@@ -63,7 +71,12 @@ const ModalContainer = () => {
   return (
     <>
       {rItem.map((x, index) => (
-        <InternalModal key={index} item={x} zIndex={context.zIndex} index={index} />
+        <InternalModal
+          key={index}
+          item={x}
+          zIndex={context.zIndex}
+          index={index}
+        />
       ))}
     </>
   );
@@ -110,7 +123,7 @@ const InternalModal = ({
       'hardwareBackPress',
       () => {
         if (item.component.props.disableBackHandler !== true)
-          item.component.props.onCloseRequest?.("BackButton");
+          item.component.props.onCloseRequest?.('BackButton');
         return true;
       }
     );
@@ -120,11 +133,43 @@ const InternalModal = ({
     };
   }, []);
 
+  const procent = ($this: number, value: number) => {
+    return ($this / 100) * value;
+  };
+
+
+  const styleSizeProps = {
+
+  } as any;
+  const stringSizeToNumber = (s: any, pValue: number) => {
+    if (!s) return s;
+    if (typeof s === 'string' && s.indexOf('%') !== -1)
+      return procent(pValue, parseFloat(s.replace(/%/g, '').trim()));
+
+    return s;
+  };
+  const styleSize = (style: any) => {
+    if (!style) return;
+    if (Array.isArray(style)) style.forEach((x) => styleSize(x));
+    else {
+      const keys = Object.keys(style);
+      const assignValue = (k: string, value: string) => {
+        if (keys.find(x => x === k))
+          styleSizeProps[k] = value;
+      }
+      assignValue("width", stringSizeToNumber(style.width, size.width));
+      assignValue("minWidth", stringSizeToNumber(style.minWidth, size.width));
+      assignValue("minHeight", stringSizeToNumber(style.minHeight, size.height));
+      assignValue("height", stringSizeToNumber(style.height, size.height));
+    }
+  };
+
   const viewStyle = () => {
+    styleSize(item.component.props.style);
     let dstyle = Array.isArray(item.component.props.style)
       ? item.component.props.style
       : [item.component.props.style];
-    dstyle = [styles.center, ...dstyle, { zIndex: 2 }];
+    dstyle = [...dstyle, { zIndex: 2, ...styleSizeProps }];
     return dstyle;
   };
 
@@ -142,6 +187,15 @@ const InternalModal = ({
     }
     return false;
   };
+
+  const onLayout = (e: any) => {
+    if (!item.component.layoutData)
+      item.component.layoutData = e.nativeEvent.layout;
+     else item.component.layoutData = {...e.nativeEvent.layout,
+       width: Math.max(e.nativeEvent.layout.width ?? 0, e.nativeEvent.layout.width),
+       height: Math.max(e.nativeEvent.layout.height ?? 0, e.nativeEvent.layout.height)
+      }
+  }
 
   return (
     <>
@@ -192,18 +246,14 @@ const InternalModal = ({
           item.component.props.containerStyle,
         ]}
         onResponderRelease={(e: any) => {
-          if (isOutSide(e)) item.component.props.onCloseRequest?.("BackDrop");
+          if (isOutSide(e)) item.component.props.onCloseRequest?.('BackDrop');
         }}
         onStartShouldSetResponder={(e: any) => {
           return isOutSide(e);
         }}>
-        <View
-          onLayout={(e) => {
-            item.component.layoutData = e.nativeEvent.layout;
-          }}
-          {...item.component.props}
-          style={viewStyle()}
-        />
+        <View onLayout={onLayout} style={{ flexDirection: 'column', ...styleSizeProps, backgroundColor: "transparent" }}>
+          <View onLayout={onLayout} {...item.component.props} style={viewStyle()} />
+        </View>
       </Animatable.View>
     </>
   );
@@ -305,17 +355,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    maxHeight: "100%",
-    minHeight: "100%"
-  },
-
-  center: {
-    width: '90%',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 8,
-    minHeight: 150
+    maxHeight: '100%',
+    minHeight: '100%',
   },
 });
 

@@ -92,16 +92,8 @@ And this is done by specifing the `zIndex`
 
 `zIndex` default start value is `90000` you can `increase` or `decrease` this value by specifying `zIndex` for `Provider` 
  
- ## Default Style
- The default style for the `Modal` Content. override it by specifying style prop
- ```json
-    "width": "90%",
-    "backgroundColor": "white",
-    "borderWidth": 1,
-    "borderRadius": 5,
-    "padding": 8,
-    "minHeight": 150
- ```
+ ## Style size
+ Settings `Modal` style `height,width,minWidth,minHeight` to `%`, will be calculated based on `screen` or `window` size
  
  ## ScrollView
  `Modal` dose not containe `ScrollView` so you have to add it if you want to use any.
