@@ -21,8 +21,9 @@ const Provider = ({
   zIndex?: number;
 }) => {
   const data = {
+    updating: undefined,
     items: new Map(),
-    update: () => { },
+    update: () => {},
     find: (id: string) => {
       return data.items.get(id);
     },
@@ -44,9 +45,8 @@ const Provider = ({
     return () => {
       data.items.clear();
       data.update();
-    }
-  }, [])
-
+    };
+  }, []);
 
   return (
     <ContextProvider.Provider value={data}>
@@ -57,11 +57,19 @@ const Provider = ({
 };
 
 const ModalContainer = () => {
-  const [_, setUpdater] = useState(0);
+  const [updater, setUpdater] = useState(0);
   const [items] = useState(new Map<string, Item>());
   const context = useContext(ContextProvider);
 
-  context.update = () => setUpdater((x) => (x > 1000 ? 0 : x) + 1);
+  useEffect(() => {
+    context.updating = false;
+  }, [updater]);
+
+  context.update = () => {
+    if (context.updating) return;
+    context.updating = true;
+    setUpdater((x) => (x > 1000 ? 0 : x) + 1);
+  };
   context.items = items;
   const rItem = [] as Item[];
   items.forEach((x) => {
@@ -137,10 +145,7 @@ const InternalModal = ({
     return ($this / 100) * value;
   };
 
-
-  const styleSizeProps = {
-
-  } as any;
+  const styleSizeProps = {} as any;
   const stringSizeToNumber = (s: any, pValue: number) => {
     if (!s) return s;
     if (typeof s === 'string' && s.indexOf('%') !== -1)
@@ -154,13 +159,15 @@ const InternalModal = ({
     else {
       const keys = Object.keys(style);
       const assignValue = (k: string, value: string) => {
-        if (keys.find(x => x === k))
-          styleSizeProps[k] = value;
-      }
-      assignValue("width", stringSizeToNumber(style.width, size.width));
-      assignValue("minWidth", stringSizeToNumber(style.minWidth, size.width));
-      assignValue("minHeight", stringSizeToNumber(style.minHeight, size.height));
-      assignValue("height", stringSizeToNumber(style.height, size.height));
+        if (keys.find((x) => x === k)) styleSizeProps[k] = value;
+      };
+      assignValue('width', stringSizeToNumber(style.width, size.width));
+      assignValue('minWidth', stringSizeToNumber(style.minWidth, size.width));
+      assignValue(
+        'minHeight',
+        stringSizeToNumber(style.minHeight, size.height)
+      );
+      assignValue('height', stringSizeToNumber(style.height, size.height));
     }
   };
 
@@ -189,13 +196,8 @@ const InternalModal = ({
   };
 
   const onLayout = (e: any) => {
-    if (!item.component.layoutData)
       item.component.layoutData = e.nativeEvent.layout;
-     else item.component.layoutData = {...e.nativeEvent.layout,
-       width: Math.max(e.nativeEvent.layout.width ?? 0, e.nativeEvent.layout.width),
-       height: Math.max(e.nativeEvent.layout.height ?? 0, e.nativeEvent.layout.height)
-      }
-  }
+  };
 
   return (
     <>
@@ -251,8 +253,14 @@ const InternalModal = ({
         onStartShouldSetResponder={(e: any) => {
           return isOutSide(e);
         }}>
-        <View onLayout={onLayout} style={{ flexDirection: 'column', ...styleSizeProps, backgroundColor: "transparent" }}>
-          <View onLayout={onLayout} {...item.component.props} style={viewStyle()} />
+        <View
+          onLayout={onLayout}
+          style={{
+            flexDirection: 'column',
+            ...styleSizeProps,
+            backgroundColor: 'transparent',
+          }}>
+          <View {...item.component.props} style={viewStyle()} />
         </View>
       </Animatable.View>
     </>

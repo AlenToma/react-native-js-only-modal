@@ -44,4 +44,5 @@ export type IContext = {
   push: (item: Item) => void;
   items: Map<string, Item>;
   zIndex: number;
+  updating?: boolean;
 };
