@@ -21,7 +21,6 @@ const Provider = ({
   zIndex?: number;
 }) => {
   const data = {
-    updating: undefined,
     items: new Map(),
     update: () => {},
     find: (id: string) => {
@@ -57,17 +56,11 @@ const Provider = ({
 };
 
 const ModalContainer = () => {
-  const [updater, setUpdater] = useState(0);
+  const [_, setUpdater] = useState(0);
   const [items] = useState(new Map<string, Item>());
   const context = useContext(ContextProvider);
 
-  useEffect(() => {
-    context.updating = false;
-  }, [updater]);
-
   context.update = () => {
-    if (context.updating) return;
-    context.updating = true;
     setUpdater((x) => (x > 1000 ? 0 : x) + 1);
   };
   context.items = items;
